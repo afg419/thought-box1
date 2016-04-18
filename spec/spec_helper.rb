@@ -17,6 +17,16 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  def login_user
+    user = User.create(email: "afg419@gmail.com", password: "password")
+
+    visit login_path
+    fill_in "user_email", with: "afg419@gmail.com"
+    fill_in "user_password", with: "password"
+    click_on "Login"
+    user
+  end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
