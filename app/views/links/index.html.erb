@@ -12,15 +12,18 @@
   <% end %>
 </div>
 
-
-<div class="container">
+<!-- <div class="container">
   <ul>
     <% @links.each do |link| %>
     <li>
       <h4><%= link.title %></h4>
       <p><%= link.url %></p>
-      <p>Read: <%= link.read %></p>
+      <p class=<%=link.read%> >Read: <%= link.read %></p>
+      <button type="button" name="button">Mark as Read</button>
     </li>
     <% end %>
   </ul>
-</div>
+</div> -->
+
+
+<%= react_component 'Main' %>

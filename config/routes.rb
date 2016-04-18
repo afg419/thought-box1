@@ -17,6 +17,12 @@ Rails.application.routes.draw do
   resource :user, only: [:new, :create]
   resources :links, only: [:index, :create]
 
+  namespace "api" do
+    namespace "v1" do
+      resources :links, only: [:index, :update]
+    end
+  end
+
   # Example resource route with options:
   #   resources :products do
   #     member do
@@ -51,9 +57,5 @@ Rails.application.routes.draw do
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  #
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "NewLink", type: :feature do
-  scenario "A logged in user can create a new link" do
+  scenario "A logged in user can create a new link", js: true do
     expect(Link.count).to eq 0
 
     mock_login_user
@@ -19,7 +19,7 @@ RSpec.feature "NewLink", type: :feature do
     expect(Link.count).to eq 1
   end
 
-  scenario "A logged in user can see all old links" do
+  scenario "A logged in user can see all old links", js: true do
     user = mock_login_user
     create_link(1, user)
     create_link(2, user)
@@ -29,7 +29,7 @@ RSpec.feature "NewLink", type: :feature do
     expect(page).to have_content("title2")
   end
 
-  scenario "A logged in user doesnt see other links" do
+  scenario "A logged in user doesnt see other links", js: true do
     user = mock_login_user
     create_link(1, user)
     create_link(2, user)
