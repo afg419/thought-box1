@@ -30,11 +30,11 @@ var Link = React.createClass({
 
   render(){
     return(
-      <div key={this.state.content.id}>
-      <h4>{this.state.content.title}</h4>
-      <p>{this.state.content.url}</p>
-      <p>Read: {""+this.state.content.read}</p>
-      <button onClick={this.handleReadUnread}>{this.readUnread()}</button>
+      <div className={this.state.content.read} key={this.state.content.id}>
+        <h4>{this.state.content.title}</h4>
+        <p>{this.state.content.url}</p>
+        <p>Read: {""+this.state.content.read}</p>
+        <button onClick={this.handleReadUnread}>{this.readUnread()}</button>
       </div>
     );
   }

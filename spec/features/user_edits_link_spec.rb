@@ -17,6 +17,5 @@ RSpec.feature "EditLink", type: :feature do
     expect(current_path).to eq links_path
     expect(page).to have_content("Read: false")
     expect(page).to have_content("Mark as read")
-
   end
 end
