@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "Created account and logged in #{@user.email}"
-      redirect_to user_path
+      redirect_to links_path
     else
       flash[:notice] = "Something blew up"
       render :new

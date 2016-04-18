@@ -9,7 +9,7 @@ RSpec.feature "Login Spec", type: :feature do
     fill_in "user_email", with: "afg419@gmail.com"
     fill_in "user_password", with: "password"
     click_on "Login"
-    expect(current_path).to eq user_path
+    expect(current_path).to eq links_path
     expect(page).to have_content("Logged in afg419@gmail.com")
   end
 

@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
       flash[:notice] = "Logged in #{@user.email}"
-      redirect_to user_path
+      redirect_to links_path
     else
       flash.now[:error] = "Incorrect username password combination"
       render :new

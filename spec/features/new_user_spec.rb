@@ -13,7 +13,7 @@ RSpec.feature "NewUserAccount", type: :feature do
     fill_in "user_email", with: "afg419@gmail.com"
     fill_in "user_password", with: "password"
     click_on "Create new account"
-    expect(current_path).to eq user_path
+    expect(current_path).to eq links_path
     expect(page).to have_content("Created account and logged in afg419@gmail.com")
     expect(User.count).to eq 1
   end
