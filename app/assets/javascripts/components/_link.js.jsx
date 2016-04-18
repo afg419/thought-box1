@@ -1,20 +1,25 @@
 var Link = React.createClass({
   getInitialState(){
-    return {read: this.props.content.read};
+    return {content: this.props.content};
   },
 
   readUnread(){
-    return {true: "Mark as unread", false: "Mark as read"}[this.state.read];
+    return {true: "Mark as unread", false: "Mark as read"}[this.state.content.read];
+  },
+
+  setContent(content){
+    this.setState({content: content});
   },
 
   handleReadUnread(){
     $.ajax({
-      url: '/api/v1/link/' + this.props.content.id,
+      url: '/api/v1/links/' + this.props.content.id,
       type: 'PATCH',
+      data: {read: !this.state.content.read},
       success: (link) => {
         if(link){
+          this.setContent(link);
           console.log(link);
-          // this.setLinksState({links: links});
         } else {
             this.setState({message: ""});
           }
@@ -25,10 +30,10 @@ var Link = React.createClass({
 
   render(){
     return(
-      <div key={this.props.content.id}>
-      <h4>{this.props.content.title}</h4>
-      <p>{this.props.content.url}</p>
-      <p>Read: {""+this.state.read}</p>
+      <div key={this.state.content.id}>
+      <h4>{this.state.content.title}</h4>
+      <p>{this.state.content.url}</p>
+      <p>Read: {""+this.state.content.read}</p>
       <button onClick={this.handleReadUnread}>{this.readUnread()}</button>
       </div>
     );

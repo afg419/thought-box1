@@ -28,7 +28,7 @@ var Links = React.createClass({
 
   renderLinks(){
     return this.state.links.map(link => {
-      return <div key={link.id}><Link content={link}/></div>;
+      return <div key={link.id}><Link content={link} setLinksState={this.setLinksState}/></div>;
     });
   },
 
