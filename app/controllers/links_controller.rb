@@ -2,17 +2,18 @@ class LinksController < ApplicationController
   before_action :authenticate_logged_in
 
   def index
-    @links = Link.all
+    @links = current_user.links
     @link = Link.new
   end
 
   def create
-    link = Link.new(link_params)
-    if link.save
+    @link = current_user.links.new(link_params)
+    if @link.save
       flash[:notice] = "Created new link!"
       redirect_to links_path
     else
       flash.now[:error] = "Invalid link"
+      @links = Link.all
       render :index
     end
   end

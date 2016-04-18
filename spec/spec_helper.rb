@@ -18,7 +18,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   def login_user
-    user = User.create(email: "afg419@gmail.com", password: "password")
+    user = create_user
 
     visit login_path
     fill_in "user_email", with: "afg419@gmail.com"
@@ -28,9 +28,17 @@ RSpec.configure do |config|
   end
 
   def mock_login_user
-    ApplicationController.any_instance.stubs(:current_user).returns(true)
-    # ApplicationController.any_instance.stubs(:current_dojo).returns(combat_federation)
+    user = create_user
+    ApplicationController.any_instance.stubs(:current_user).returns(user)
+    user
+  end
 
+  def create_user
+    User.create(email: "afg419@gmail.com", password: "password")
+  end
+
+  def create_link(n, user)
+    user.links.create(title: "title#{n}", url: "http://www.google#{n}.com")
   end
 
   # rspec-expectations config goes here. You can use an alternate
