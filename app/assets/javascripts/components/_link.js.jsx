@@ -1,6 +1,6 @@
 var Link = React.createClass({
   getInitialState(){
-    return {content: this.props.content, editable: false};
+    return {content: this.props.content, editable: false, message: ""};
   },
 
   readUnread(){
@@ -15,11 +15,10 @@ var Link = React.createClass({
     $.ajax({
       url: '/api/v1/links/' + this.props.content.id,
       type: 'PATCH',
-      data: {read: !this.state.content.read},
+      data: {link: {read: !this.state.content.read}},
       success: (link) => {
         if(link){
           this.setContent(link);
-          console.log(link);
         } else {
             this.setState({message: ""});
           }
@@ -28,16 +27,20 @@ var Link = React.createClass({
     );
   },
 
-  renderEdit(){
+  toggleEdit(){
     this.setState({editable: !this.state.editable}, ()=>{console.log("happened");});
+  },
+
+  setMessage(msg){
+    this.setState({message: "" + msg}, ()=>{console.log("happened");});
   },
 
   editableEntries(){
     var renderable;
     if(this.state.editable){
       renderable = (<div>
-        <input ref="title" type="text" value={this.state.content.title}></input>
-        <input ref="url" type="text" value={this.state.content.url}></input>
+        <input name="title" ref="title" placeholder={this.state.content.title}></input>
+        <input name="url" ref="url" placeholder={this.state.content.url}></input>
         <button onClick={this.handleUpdate}>Update link</button>
         </div>);
     } else {
@@ -55,13 +58,17 @@ var Link = React.createClass({
     $.ajax({
       url: '/api/v1/links/' + this.props.content.id,
       type: 'PATCH',
-      // data: {read: !this.state.content.read},
+      data: {link: {title: title, url: url}},
       success: (link) => {
         if(link){
           this.setContent(link);
+          this.toggleEdit();
+          this.setMessage();
           console.log(link);
         } else {
-            this.setState({message: ""});
+          this.toggleEdit();
+          this.setMessage("" + url + " is an invalid url!");
+          console.log("FUCKKK");
           }
         }
       }
@@ -73,8 +80,9 @@ var Link = React.createClass({
       <div className={this.state.content.read} key={this.state.content.id}>
         {this.editableEntries()}
         <p>Read: {""+this.state.content.read}</p>
+        <p>{this.state.message}</p>
         <button onClick={this.handleReadUnread}>{this.readUnread()}</button>
-        <button onClick={this.renderEdit}>Edit</button>
+        <button onClick={this.toggleEdit}>Edit</button>
       </div>
     );
   }
