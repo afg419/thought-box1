@@ -1,0 +1,26 @@
+<h1>All dem Links</h1>
+
+<div class="container">
+  <%= form_for @link do |f| %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %><br>
+  <%= f.label :url %>
+  <%= f.text_field :url %><br>
+  <%= f.submit "Create new link" %>
+
+  <% end %>
+</div>
+
+
+<div class="container">
+  <ul>
+    <% @links.each do |link| %>
+    <li>
+      <h4><%= link.title %></h4>
+      <p><%= link.url %></p>
+      <p>Read: <%= link.read %></p>
+    </li>
+    <% end %>
+  </ul>
+</div>

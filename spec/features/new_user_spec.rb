@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature "NewUserAccount", type: :feature do
-  # before(:each) do
-  #
-  # end
-
   scenario "A user can create new account" do
     expect(User.count).to eq 0
 

@@ -27,6 +27,12 @@ RSpec.configure do |config|
     user
   end
 
+  def mock_login_user
+    ApplicationController.any_instance.stubs(:current_user).returns(true)
+    # ApplicationController.any_instance.stubs(:current_dojo).returns(combat_federation)
+
+  end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -42,14 +48,15 @@ RSpec.configure do |config|
   end
 
   # rspec-mocks config goes here. You can use an alternate test double
-  # library (such as bogus or mocha) by changing the `mock_with` option here.
-  config.mock_with :rspec do |mocks|
-    # Prevents you from mocking or stubbing a method that does not exist on
-    # a real object. This is generally recommended, and will default to
-    # `true` in RSpec 4.
-    mocks.verify_partial_doubles = true
-  end
+  # # library (such as bogus or mocha) by changing the `mock_with` option here.
+  # config.mock_with :rspec do |mocks|
+  #   # Prevents you from mocking or stubbing a method that does not exist on
+  #   # a real object. This is generally recommended, and will default to
+  #   # `true` in RSpec 4.
+  #   mocks.verify_partial_doubles = true
+  # end
 
+  config.mock_with :mocha
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
