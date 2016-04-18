@@ -5,7 +5,7 @@ RSpec.feature "NewUserAccount", type: :feature do
   #
   # end
 
-  scenario "A logged in user can see email" do
+  scenario "A user can create new account" do
     expect(User.count).to eq 0
 
     visit root_path
