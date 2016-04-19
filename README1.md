@@ -1,0 +1,3 @@
+# thought-box1
+Just a little assessment the teachers thought they could keep us down with...  
+Production app [heroku](https://ag-thought-box.herokuapp.com/)
