@@ -8,7 +8,6 @@ var Links = React.createClass({
       return link.id !== newLink.id;
     });
     this.setState({links: newLinks.concat([newLink])});
-    debugger
   },
 
   sortId(l1, l2){
