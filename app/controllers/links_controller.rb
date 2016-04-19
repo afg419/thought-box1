@@ -13,7 +13,7 @@ class LinksController < ApplicationController
       redirect_to links_path
     else
       flash.now[:error] = "Invalid link"
-      @links = Link.all
+      @links = current_user.links.select{|l| !l.id.nil?}
       render :index
     end
   end

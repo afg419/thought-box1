@@ -49,8 +49,8 @@ RSpec.feature "EditLink", type: :feature do
     fill_in "url", with: "blackmomba"
     click_on "Update link"
 
-    expect(page).to have_content("title1")
-    expect(page).to have_content("http://www.google1.com")
+    expect(page).to_not have_content("title2")
+    expect(page).to_not have_content("blacmomba")
     expect(page).to have_content("blackmomba is an invalid url!")
   end
 

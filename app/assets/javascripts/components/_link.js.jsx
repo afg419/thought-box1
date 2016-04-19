@@ -19,8 +19,9 @@ var Link = React.createClass({
       success: (link) => {
         if(link){
           this.setContent(link);
+          this.props.swapLink(link);
         } else {
-            this.setState({message: ""});
+            console.log("something went horribly wrong");
           }
         }
       }
@@ -28,7 +29,7 @@ var Link = React.createClass({
   },
 
   toggleEdit(){
-    this.setState({editable: !this.state.editable}, ()=>{console.log("happened");});
+    this.setState({editable: !this.state.editable, message: ""}, ()=>{console.log("happened");});
   },
 
   setMessage(msg){
@@ -64,11 +65,9 @@ var Link = React.createClass({
           this.setContent(link);
           this.toggleEdit();
           this.setMessage();
-          console.log(link);
+          this.props.swapLink(link);
         } else {
-          this.toggleEdit();
           this.setMessage("" + url + " is an invalid url!");
-          console.log("FUCKKK");
           }
         }
       }
@@ -77,11 +76,11 @@ var Link = React.createClass({
 
   render(){
     return(
-      <div className={this.state.content.read} key={this.state.content.id}>
+      <div id={"link-" + this.state.content.id} className={this.state.content.read} key={this.state.content.id}>
         {this.editableEntries()}
         <p>Read: {""+this.state.content.read}</p>
         <p>{this.state.message}</p>
-        <button onClick={this.handleReadUnread}>{this.readUnread()}</button>
+        <button name={"read-"+this.state.content.id} onClick={this.handleReadUnread}>{this.readUnread()}</button>
         <button onClick={this.toggleEdit}>Edit</button>
       </div>
     );
